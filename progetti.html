@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Bertolini · Progetti</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* ===== NAVBAR (identica alle altre pagine) ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px -10px rgba(0,0,0,0.05);
+        }
+
+        .logo a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(145deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: currentColor;
+            transition: width 0.25s ease;
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            font-weight: 600;
+        }
+
+        /* Colori specifici voci menu (coerenti con home) */
+        .nav-links a[href="index.html"] { color: #1e293b; }
+        .nav-links a[href="cv.html"] { color: #1e4a4a; }
+        .nav-links a[href="progetti.html"] { color: #b45309; }
+        .nav-links a[href="hobby.html"] { color: #b22222; }
+        .nav-links a[href="contatti.html"] { 
+            color: #ffffff; 
+            background: #0f172a; 
+            padding: 0.4rem 1.2rem; 
+            border-radius: 40px; 
+            margin-top: -0.2rem;
+        }
+        .nav-links a[href="contatti.html"]::after {
+            display: none;
+        }
+        .nav-links a[href="contatti.html"]:hover {
+            background: #1e293b;
+            transform: scale(1.02);
+        }
+
+        /* Selettore lingua */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-left: 1px solid #cbd5e1;
+            padding-left: 1.5rem;
+        }
+        .lang-switch a {
+            color: #64748b;
+            text-decoration: none;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .lang-switch a.active-lang {
+            background: #1e293b;
+            color: white;
+        }
+        .lang-switch a:not(.active-lang):hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* ===== MAIN CONTENT PROGETTI ===== */
+        .main-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #b45309;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* FILTRI */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0 3rem;
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            box-shadow: 0 10px 20px -10px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #1e293b;
+        }
+        .filter-btn:hover {
+            border-color: #b45309;
+            background: #fff3e6;
+        }
+        .filter-btn.active {
+            background: #b45309;
+            color: white;
+            border-color: #b45309;
+        }
+
+        /* Griglia progetti */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Card progetto */
+        .project-card {
+            background: white;
+            border-radius: 40px;
+            padding: 1.8rem;
+            box-shadow: 0 15px 30px -15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(180, 83, 9, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px -18px #b45309;
+            border-color: #b4530930;
+        }
+
+        .card-media {
+            width: 100%;
+            height: 180px;
+            background: #f1f5f9;
+            border-radius: 30px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b45309;
+            font-size: 3rem;
+            background-size: cover;
+            background-position: center;
+        }
+        .media-placeholder {
+            background: linear-gradient(145deg, #ffe6cc, #ffd6b3);
+        }
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .project-card:hover .play-overlay {
+            opacity: 1;
+        }
+        .play-overlay i {
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            padding: 1rem;
+            font-size: 2rem;
+            color: #b45309;
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #b45309;
+            margin-bottom: 0.5rem;
+        }
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+        }
+        .card-tag {
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+        .card-description {
+            color: #334155;
+            font-size: 0.95rem;
+            margin: 0.8rem 0;
+            line-height: 1.6;
+        }
+        .card-members {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #475569;
+            margin: 0.5rem 0;
+        }
+        .card-members i {
+            color: #b45309;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #0f172a;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .github-link:hover {
+            background: #b45309;
+        }
+        .github-link i {
+            font-size: 1.1rem;
+        }
+        .status-badge {
+            background: #f1f5f9;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #b45309;
+            border: 1px solid #b4530930;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            color: #64748b;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Scroll fade */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .lang-switch { border-left: none; padding-left: 0; margin-left: 0; }
+            .filter-bar { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">RB</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="cv.html">CV</a>
+            <a href="progetti.html" class="active">Progetti</a>
+            <a href="hobby.html">Sport & Hobby</a>
+            <a href="contatti.html">Contatti</a>
+            <div class="lang-switch">
+                <a class="active-lang">IT</a>
+                <a>EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="page-title scroll-fade"><i class="fa-regular fa-folder-open"></i> Progetti</h1>
+
+        <!-- Barra dei filtri (generata dinamicamente in JS) -->
+        <div class="filter-bar scroll-fade" id="filterBar">
+            <!-- verrà popolata da JS -->
+        </div>
+
+        <!-- Griglia progetti -->
+        <div class="projects-grid scroll-fade" id="projectsGrid">
+            <!-- I progetti vengono inseriti da JS -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Robin Bertolini · ingegneria delle comunicazioni e elettronica</p>
+    </footer>
+
+    <script>
+        (function() {
+            // ---------- DATI PROGETTI (in formato array) ----------
+            const projects = [
+                {
+                    title: "pigGame & calculator in VHDL",
+                    description: "Due progetti didattici per FPGA: un simulatore del gioco 'Pig' (dadi) e una calcolatrice semplice. Sviluppati in VHDL con testbench e implementazione su scheda DE10-Lite.",
+                    tags: ["VHDL", "Elettronica", "FPGA"],
+                    mediaType: "image",
+                    mediaUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop",
+                    github: "https://github.com/robinbertolini/vhdl-pig-calculator",
+                    members: "con Marco Tondini e Sofia Rossi",
+                    status: null
+                },
+                {
+                    title: "Gear Controller via FPGA",
+                    description: "Controller per cambio automatico di marcia simulato su FPGA. Progetto in fase di sviluppo, con logica sequenziale e display seven-segment. Interfacciamento con encoder e motore DC.",
+                    tags: ["VHDL", "FPGA", "Elettronica"],
+                    mediaType: "image",
+                    mediaUrl: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=200&fit=crop",
+                    github: "https://github.com/robinbertolini/gear-controller-fpga",
+                    members: "con Gabriel M. Liberato",
+                    status: "In via di sviluppo · pronto fine maggio 2025"
+                },
+                {
+                    title: "Wordle Solver (Java / JavaFX)",
+                    description: "Solver automatico per il gioco Wordle, basato su algoritmi di eliminazione e feedback. Interfaccia grafica JavaFX e motore di ricerca lessicale su dizionario italiano.",
+                    tags: ["Java", "JavaFX", "Algoritmi"],
+                    mediaType: "image",
+                    mediaUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=200&fit=crop",
+                    github: "https://github.com/robinbertolini/wordle-solver",
+                    members: null,
+                    status: null
+                },
+                {
+                    title: "AgriSmart - Robot da campo",
+                    description: "Progetto presentato alla RomeCup 2024 (con un team di 20 persone). AgriSmart è un robot autonomo per l'agricoltura di precisione in grado di rilevare parametri del terreno e ottimizzare l'irrigazione.",
+                    tags: ["Visione Artificiale", "Python", "Project Manager", "Machine Learning", "Arduino"],
+                    mediaType: "video",
+                    mediaUrl: "https://images.unsplash.com/photo-1581092335871-4c7c8e8c3f3c?w=400&h=200&fit=crop", // placeholder
+                    github: null,
+                    members: "Team di 20 persone (Liceo B. Russell Cles)",
+                    status: "Premiato alla RomeCup 2024"
+                },
+                {
+                    title: "Sicurezza Carro-Raccolta",
+                    description: "Sistema di sicurezza per carri raccolta basato su visione artificiale e sensori Arduino. Rileva ostacoli e previene incidenti durante le manovre in campo. Progetto esposto alla RomeCup 2024.",
+                    tags: ["Visione Artificiale", "Python", "Arduino", "Machine Learning"],
+                    mediaType: "video",
+                    mediaUrl: "https://images.unsplash.com/photo-1581092160562-40aa08e6b8f5?w=400&h=200&fit=crop",
+                    github: null,
+                    members: "Team di 20 persone (Liceo B. Russell Cles)",
+                    status: "RomeCup 2024"
+                }
+            ];
+
+            // ---------- FUNZIONI PER FILTRI E RENDERING ----------
+            const filterBar = document.getElementById('filterBar');
+            const projectsGrid = document.getElementById('projectsGrid');
+
+            // Estrai tutti i tag unici
+            const allTagsSet = new Set();
+            projects.forEach(p => p.tags.forEach(t => allTagsSet.add(t)));
+            const allTags = Array.from(allTagsSet).sort();
+
+            // Crea i pulsanti filtro
+            function renderFilterButtons() {
+                let html = `<button class="filter-btn active" data-filter="all">Tutti</button>`;
+                allTags.forEach(tag => {
+                    html += `<button class="filter-btn" data-filter="${tag}">${tag}</button>`;
+                });
+                filterBar.innerHTML = html;
+
+                // Aggiungi event listener
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        const filter = this.dataset.filter;
+                        filterProjects(filter);
+                    });
+                });
+            }
+
+            // Filtra i progetti in base al tag selezionato
+            function filterProjects(filter) {
+                const cards = document.querySelectorAll('.project-card');
+                cards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+                        if (cardTags.includes(filter)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            // Renderizza tutte le card
+            function renderProjects() {
+                let html = '';
+                projects.forEach(p => {
+                    const tagsAttr = p.tags.join(',');
+                    const membersHtml = p.members ? `<div class="card-members"><i class="fa-regular fa-user-group"></i> ${p.members}</div>` : '';
+                    const statusHtml = p.status ? `<span class="status-badge"><i class="fa-regular fa-hourglass-half"></i> ${p.status}</span>` : '';
+                    const githubHtml = p.github ? `<a href="${p.github}" target="_blank" class="github-link"><i class="fa-brands fa-github"></i> GitHub</a>` : '';
+
+                    html += `
+                        <div class="project-card" data-tags="${tagsAttr}">
+                            <div class="card-media media-placeholder" style="background-image: url('${p.mediaUrl}'); background-size: cover;">
+                                <div class="play-overlay"><i class="fa-regular fa-circle-play"></i></div>
+                            </div>
+                            <div class="card-title">${p.title}</div>
+                            <div class="card-tags">
+                                ${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+                            </div>
+                            <div class="card-description">${p.description}</div>
+                            ${membersHtml}
+                            <div class="card-footer">
+                                ${githubHtml}
+                                ${statusHtml}
+                            </div>
+                        </div>
+                    `;
+                });
+                projectsGrid.innerHTML = html;
+            }
+
+            // Inizializza
+            renderFilterButtons();
+            renderProjects();
+
+            // Attiva filtro 'Tutti' all'avvio
+            filterProjects('all');
+
+            // ---------- SELEZIONE LINGUA (demo) ----------
+            const langIt = document.querySelector('.lang-switch a:first-child');
+            const langEn = document.querySelector('.lang-switch a:last-child');
+            langIt.addEventListener('click', (e) => {
+                e.preventDefault();
+                langIt.classList.add('active-lang');
+                langEn.classList.remove('active-lang');
+            });
+            langEn.addEventListener('click', (e) => {
+                e.preventDefault();
+                langEn.classList.add('active-lang');
+                langIt.classList.remove('active-lang');
+            });
+
+            // ---------- SCROLL REVEAL ----------
+            const fadeElements = document.querySelectorAll('.scroll-fade');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
+
+            fadeElements.forEach(el => observer.observe(el));
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                    observer.unobserve(el);
+                }
+            });
+
+            // Active nav link (assicura che 'Progetti' sia attivo)
+            const currentPage = window.location.pathname.split('/').pop() || 'progetti.html';
+            document.querySelectorAll('.nav-links a:not(.lang-switch a)').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) link.classList.add('active');
+            });
+        })();
+    </script>
+</body>
+</html>
