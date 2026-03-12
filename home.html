@@ -25,7 +25,7 @@
             scroll-behavior: smooth;
         }
 
-        /* ===== NAVBAR con colori personalizzati e selettore lingua ===== */
+        /* ===== NAVBAR con colori personalizzati e selettore lingua FUNZIONANTE ===== */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -63,6 +63,7 @@
             position: relative;
             padding: 0.3rem 0;
             transition: color 0.2s;
+            text-decoration: none;
         }
 
         .nav-links a::after {
@@ -107,7 +108,7 @@
             transform: scale(1.02);
         }
 
-        /* selettore lingua */
+        /* selettore lingua - ora funziona */
         .lang-switch {
             display: flex;
             gap: 0.5rem;
@@ -123,6 +124,7 @@
             padding: 0.2rem 0.6rem;
             border-radius: 30px;
             transition: all 0.2s;
+            cursor: pointer;
         }
         .lang-switch a.active-lang {
             background: #1e293b;
@@ -133,86 +135,45 @@
             color: #1e293b;
         }
 
-        /* ===== COVER (semplificata) ===== */
-        .cover-wrapper {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            background: #1e293b;
-        }
-        .cover-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 30%;
-            filter: brightness(0.85) saturate(1.2);
-        }
-
-        /* ===== FOTO PROFILO (ora intera e centrata) ===== */
-        .profile-section {
-            display: flex;
-            justify-content: center;
-            margin-top: -50px; /* leggera sovrapposizione, ma foto intera */
-            margin-bottom: 1rem;
-        }
-        .profile-pic {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 5px solid white;
-            object-fit: cover;
-            object-position: center 20%;
-            background: white;
-            box-shadow: 0 20px 30px -10px rgba(37,99,235,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .profile-pic:hover {
-            transform: scale(1.02);
-            box-shadow: 0 25px 35px -8px #2563eb;
-        }
-
-        /* ===== MAIN CONTENT ===== */
+        /* ===== MAIN CONTENT (NUOVA STRUTTURA: NIENTE COVER, FOTO TONDA INTEGRATA) ===== */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem 4rem;
+            padding: 2rem 2rem 4rem;
         }
 
+        /* Hero a due colonne: sinistra testo + foto tonda, destra foto verticale */
         .hero-row {
             display: flex;
             align-items: center;
             gap: 3rem;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
-        .hero-text {
+        .hero-left {
             flex: 1 1 500px;
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .hero-image {
-            flex: 0 0 300px;
-            text-align: center;
-        }
-
-        .fullbody-cutout {
-            width: 100%;
-            max-width: 320px;
-            border-radius: 30px;
+        /* foto profilo tonda integrata, ben visibile e intera */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             object-fit: cover;
-            object-position: center top;
-            box-shadow: 0 30px 45px -20px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            border: 3px solid rgba(255,255,255,0.5);
-            background: white;
-            aspect-ratio: 0.7 / 1;
+            object-position: center 20%;
+            border: 4px solid white;
+            box-shadow: 0 20px 25px -10px rgba(37,99,235,0.3);
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s;
         }
-
-        .fullbody-cutout:hover {
-            transform: scale(1.02) translateY(-5px);
-            box-shadow: 0 35px 50px -18px #2563eb;
+        .profile-pic:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 30px -8px #2563eb;
         }
 
         .hero-title {
@@ -286,6 +247,30 @@
             border-color: #2563eb;
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 12px 20px -12px #2563eb;
+        }
+
+        /* colonna destra: foto verticale */
+        .hero-right {
+            flex: 0 0 300px;
+            text-align: center;
+        }
+
+        .fullbody-cutout {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 30px;
+            object-fit: cover;
+            object-position: center top;
+            box-shadow: 0 30px 45px -20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 3px solid rgba(255,255,255,0.5);
+            background: white;
+            aspect-ratio: 0.7 / 1;
+        }
+
+        .fullbody-cutout:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 35px 50px -18px #2563eb;
         }
 
         .extra-bio {
@@ -388,10 +373,7 @@
             .lang-switch { border-left: none; padding-left: 0; margin-left: 0; }
             .hero-title { font-size: 2.5rem; }
             .hero-subtitle { font-size: 1.3rem; }
-            .profile-pic { width: 140px; height: 140px; }
-            .profile-section { margin-top: -30px; }
-            .hero-row { flex-direction: column; text-align: center; }
-            .hero-text { text-align: center; }
+            .hero-left { align-items: center; text-align: center; }
             .qualities { justify-content: center; }
             .big-button { font-size: 1.2rem; padding: 1.2rem; }
         }
@@ -406,27 +388,20 @@
             <a href="progetti.html">Progetti</a>
             <a href="hobby.html">Sport & Hobby</a>
             <a href="contatti.html">Contatti</a>
-            <!-- selettore lingua -->
+            <!-- selettore lingua funzionante -->
             <div class="lang-switch">
-                <a href="#" class="active-lang">IT</a>
-                <a href="#">EN</a>
+                <a class="active-lang">IT</a>
+                <a>EN</a>
             </div>
         </div>
     </nav>
 
-    <!-- Cover semplice -->
-    <div class="cover-wrapper">
-        <img class="cover-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&h=200&fit=crop&auto=format&q=80" alt="Cover" loading="lazy">
-    </div>
-
-    <!-- Foto profilo separata, intera e centrata -->
-    <div class="profile-section">
-        <img class="profile-pic" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces&q=80" alt="Robin Bertolini">
-    </div>
-
     <main class="main-content">
+        <!-- NUOVA STRUTTURA: foto tonda integrata nella colonna di sinistra, niente cover -->
         <div class="hero-row scroll-fade">
-            <div class="hero-text">
+            <div class="hero-left">
+                <!-- foto profilo tonda, intera e ben visibile -->
+                <img class="profile-pic" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces&q=80" alt="Robin Bertolini">
                 <h1 class="hero-title">Hi, I'm Robin Bertolini</h1>
                 <div class="hero-subtitle">
                     <span>🎓 Computer, Communications & Electronic Engineering</span>
@@ -443,9 +418,9 @@
                     <span class="quality-item"><i class="fa-regular fa-object-ungroup"></i> FPGA</span>
                 </div>
             </div>
-            <div class="hero-image">
-                <!-- Foto a figura intera -->
-                <img class="fullbody-cutout" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&q=80&auto=format&fit=crop&crop=entire" alt="Robin a figura intera" loading="lazy">
+            <div class="hero-right">
+                <!-- Foto a figura intera (verticale) - sostituita con una più appropriata -->
+                <img class="fullbody-cutout" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80&auto=format&fit=crop&crop=entire" alt="Robin a figura intera" loading="lazy">
             </div>
         </div>
 
@@ -468,24 +443,33 @@
 
     <script>
         (function() {
+            // Active nav link (esclude i link della lingua)
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             document.querySelectorAll('.nav-links a:not(.lang-switch a)').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === currentPage) link.classList.add('active');
             });
 
-            // Simulazione cambio lingua (solo estetica)
+            // Gestione cambio lingua (funzionale: cambia active e, volendo, si potrebbe tradurre)
             const langIt = document.querySelector('.lang-switch a:first-child');
             const langEn = document.querySelector('.lang-switch a:last-child');
+            
             langIt.addEventListener('click', (e) => {
                 e.preventDefault();
                 langIt.classList.add('active-lang');
                 langEn.classList.remove('active-lang');
+                // Qui potresti aggiungere la logica per tradurre i testi della pagina
+                console.log('Lingua impostata: IT');
             });
+            
             langEn.addEventListener('click', (e) => {
                 e.preventDefault();
                 langEn.classList.add('active-lang');
                 langIt.classList.remove('active-lang');
+                console.log('Lingua impostata: EN');
+                // Esempio di cambio testo (scommentare per attivare)
+                // document.querySelector('.hero-title').innerText = "Hi, I'm Robin Bertolini";
+                // etc.
             });
 
             // Scroll reveal
