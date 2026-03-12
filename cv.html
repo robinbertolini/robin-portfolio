@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Bertolini · CV</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* ===== NAVBAR (identica alla home) ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px -10px rgba(0,0,0,0.05);
+        }
+
+        .logo a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(145deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: currentColor;
+            transition: width 0.25s ease;
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            font-weight: 600;
+        }
+
+        /* Colori specifici voci menu (stessi della home) */
+        .nav-links a[href="index.html"] { color: #1e293b; }
+        .nav-links a[href="cv.html"] { color: #1e4a4a; }
+        .nav-links a[href="progetti.html"] { color: #b45309; }
+        .nav-links a[href="hobby.html"] { color: #b22222; }
+        .nav-links a[href="contatti.html"] { 
+            color: #ffffff; 
+            background: #0f172a; 
+            padding: 0.4rem 1.2rem; 
+            border-radius: 40px; 
+            margin-top: -0.2rem;
+        }
+        .nav-links a[href="contatti.html"]::after {
+            display: none;
+        }
+        .nav-links a[href="contatti.html"]:hover {
+            background: #1e293b;
+            transform: scale(1.02);
+        }
+
+        /* Selettore lingua (presente anche in home) */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-left: 1px solid #cbd5e1;
+            padding-left: 1.5rem;
+        }
+        .lang-switch a {
+            color: #64748b;
+            text-decoration: none;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .lang-switch a.active-lang {
+            background: #1e293b;
+            color: white;
+        }
+        .lang-switch a:not(.active-lang):hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* ===== MAIN CONTENT CV ===== */
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        /* Intestazione profilo (simile LinkedIn) */
+        .cv-header {
+            background: white;
+            border-radius: 40px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 30px -15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(30, 74, 74, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cv-header:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 35px -18px #1e4a4a;
+        }
+
+        .header-row {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .profile-pic-cv {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 15px 25px -10px #1e4a4a60;
+        }
+        .header-info h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e4a4a;
+            margin-bottom: 0.2rem;
+        }
+        .header-info .title {
+            font-size: 1.2rem;
+            color: #334155;
+            margin-bottom: 0.5rem;
+            max-width: 650px;
+        }
+        .header-info .location {
+            color: #64748b;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.2rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.2rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #1e4a4a;
+            font-weight: 500;
+            font-size: 0.95rem;
+            background: #f1f5f9;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            transition: background 0.2s;
+        }
+        .contact-item:hover {
+            background: #e2e8f0;
+        }
+        .contact-item i {
+            font-size: 1rem;
+        }
+
+        /* Sezioni generiche */
+        .cv-section {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px -12px rgba(0,0,0,0.06);
+            border: 1px solid rgba(30, 74, 74, 0.1);
+            transition: all 0.3s ease;
+        }
+        .cv-section:hover {
+            box-shadow: 0 15px 25px -15px #1e4a4a80;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e4a4a;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Esperienze (card) */
+        .experience-item {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.8rem 0;
+            padding: 1.2rem;
+            border-radius: 30px;
+            transition: all 0.2s;
+            background: #fafdff;
+        }
+        .experience-item:hover {
+            background: #f1f9f9;
+            transform: scale(1.01) translateX(6px);
+            box-shadow: 0 5px 15px -10px #1e4a4a;
+        }
+        .exp-icon {
+            flex: 0 0 50px;
+            height: 50px;
+            background: #1e4a4a20;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4a4a;
+            font-size: 1.4rem;
+        }
+        .exp-content {
+            flex: 1;
+        }
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.3rem;
+        }
+        .exp-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #0f172a;
+        }
+        .exp-date {
+            color: #1e4a4a;
+            font-weight: 500;
+            font-size: 0.9rem;
+            background: #e2e8f0;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+        }
+        .exp-sub {
+            font-weight: 600;
+            color: #1e4a4a;
+            margin: 0.2rem 0 0.5rem;
+        }
+        .exp-description {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Competenze (tag) */
+        .skills-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .skill-tag {
+            background: #eef2ff;
+            color: #1e4a4a;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid #1e4a4a20;
+            transition: all 0.15s;
+        }
+        .skill-tag:hover {
+            background: #1e4a4a;
+            color: white;
+            transform: scale(1.05);
+            border-color: #1e4a4a;
+        }
+
+        /* Lingue e certificazioni a griglia */
+        .languages-grid, .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .lang-item, .cert-item {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+        .lang-item:hover, .cert-item:hover {
+            background: #1e4a4a;
+            color: white;
+            border-color: #1e4a4a;
+            transform: translateY(-3px);
+        }
+        .lang-item i, .cert-item i {
+            font-size: 1.4rem;
+            color: #1e4a4a;
+            transition: color 0.2s;
+        }
+        .lang-item:hover i, .cert-item:hover i {
+            color: white;
+        }
+        .lang-name {
+            font-weight: 600;
+            flex: 1;
+        }
+        .lang-level {
+            font-size: 0.85rem;
+            background: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #1e293b;
+        }
+        .lang-item:hover .lang-level {
+            background: #1e4a4a;
+            color: white;
+            border: 1px solid white;
+        }
+
+        /* Premi e riconoscimenti */
+        .honor-item {
+            display: flex;
+            gap: 1rem;
+            margin: 1.2rem 0;
+            align-items: center;
+            background: #f8fafc;
+            padding: 1rem 1.8rem;
+            border-radius: 50px;
+            transition: all 0.2s;
+        }
+        .honor-item:hover {
+            background: #1e4a4a;
+            color: white;
+            transform: translateX(8px);
+        }
+        .honor-item i {
+            font-size: 1.5rem;
+            color: #1e4a4a;
+        }
+        .honor-item:hover i {
+            color: white;
+        }
+        .honor-name {
+            font-weight: 600;
+            flex: 1;
+        }
+        .honor-date {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .honor-item:hover .honor-date {
+            color: #e2e8f0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            color: #64748b;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Scroll fade animation (come home) */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .lang-switch { border-left: none; padding-left: 0; margin-left: 0; }
+            .header-row { justify-content: center; text-align: center; }
+            .contact-bar { justify-content: center; }
+            .experience-item { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">RB</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="cv.html" class="active">CV</a>
+            <a href="progetti.html">Progetti</a>
+            <a href="hobby.html">Sport & Hobby</a>
+            <a href="contatti.html">Contatti</a>
+            <div class="lang-switch">
+                <a class="active-lang">IT</a>
+                <a>EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Intestazione profilo con contatti -->
+        <div class="cv-header scroll-fade">
+            <div class="header-row">
+                <img class="profile-pic-cv" src="https://media.licdn.com/dms/image/v2/D5603AQGDRt0fNI207w/profile-displayphoto-shrink_800_800/B56ZWWMa0xGQAc-/0/1741981594347?e=1775088000&v=beta&t=yAneLYZLy-esf9KHJm74rhS2nFO048qiseNLnpMJUY0" alt="Robin Bertolini">
+                <div class="header-info">
+                    <h1>Robin Bertolini</h1>
+                    <div class="title">Studente di Ingegneria Informatica, Elettronica e delle Comunicazioni | Appassionato di tecnologie emergenti e attività outdoor | In cerca di opportunità nel settore ICT</div>
+                    <div class="location"><i class="fa-regular fa-location-dot"></i> Vermiglio, Trentino-Alto Adige, Italia</div>
+                </div>
+            </div>
+            <div class="contact-bar">
+                <span class="contact-item"><i class="fa-regular fa-phone"></i> 3474642301</span>
+                <span class="contact-item"><i class="fa-regular fa-envelope"></i> robinbertolini@gmail.com</span>
+                <span class="contact-item"><i class="fa-brands fa-linkedin"></i> /in/robin-bertolini-</span>
+            </div>
+        </div>
+
+        <!-- COMPETENZE PRINCIPALI (tag) -->
+        <div class="cv-section scroll-fade">
+            <div class="section-title"><i class="fa-regular fa-star"></i> Competenze principali</div>
+            <div class="skills-cloud">
+                <span class="skill-tag">Visione artificiale</span>
+                <span class="skill-tag">Sviluppo Tecnico & Simulazione</span>
+                <span class="skill-tag">Project Management</span>
+                <span class="skill-tag">Drone UAS (A1/A3)</span>
+                <span class="skill-tag">Programmazione C/C++/Python</span>
+                <span class="skill-tag">Embedded systems</span>
+                <span class="skill-tag">Fotografia e videomaking</span>
+            </div>
+        </div>
+
+        <!-- ESPERIENZA (lista completa) -->
+        <div class="cv-section scroll-fade">
+            <div class="section-title"><i class="fa-regular fa-briefcase"></i> Esperienza</div>
+
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-chalkboard-user"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Tutor freelance di Informatica e Matematica</span>
+                        <span class="exp-date">mag 2025 - Present</span>
+                    </div>
+                    <div class="exp-sub">Vermiglio, Trentino-Alto Adige</div>
+                    <div class="exp-description">
+                        Offro lezioni private personalizzate in: Informatica (liceo), Matematica (liceo), Analisi 1 e 2 (università), Programmazione 1 e 2. Collaboro con studenti di scuole superiori e universitari del primo anno, supportandoli nel consolidamento delle competenze e nella preparazione a verifiche ed esami. Strutturo ogni lezione in base alle esigenze specifiche, con approccio pratico e orientato ai risultati.
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-camera"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Assistente fotografo</span>
+                        <span class="exp-date">apr 2023 - Present</span>
+                    </div>
+                    <div class="exp-sub">Foto Bertolini · Vermiglio</div>
+                    <div class="exp-description">
+                        Collaborazione multifunzionale nell'azienda di famiglia. Supporto durante servizi fotografici e video, impiego di drone personale. Realizzazione del sito web ufficiale e gestione della strategia digitale: aggiornamento canali social e contenuti promozionali.
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-building"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Collaboratore Mensa</span>
+                        <span class="exp-date">set 2025 - ott 2025</span>
+                    </div>
+                    <div class="exp-sub">College la Collina · Trento</div>
+                </div>
+            </div>
+
+            <!-- Ursus Adventures (tre periodi, li compattiamo con voci distinte) -->
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-bow-arrow"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Istruttore di attività all'aperto</span>
+                        <span class="exp-date">ago 2025 (1 mese)</span>
+                    </div>
+                    <div class="exp-sub">Ursus Adventures · Ossana</div>
+                    <div class="exp-description">
+                        Conduzione di archery experiences e paintball per gruppi di tutte le età. Gestione autonoma delle attività, sicurezza, engagement, outdoor leadership.
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-bow-arrow"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Istruttore di attività all'aperto</span>
+                        <span class="exp-date">ago 2024 (1 mese)</span>
+                    </div>
+                    <div class="exp-sub">Ursus Adventures · Ossana</div>
+                    <div class="exp-description">
+                        Conduzione archery experiences e paintball sessions, sicurezza, engagement, outdoor leadership.
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-bow-arrow"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Istruttore di attività all'aperto</span>
+                        <span class="exp-date">lug 2023 - ago 2023</span>
+                    </div>
+                    <div class="exp-sub">Ursus Adventures · Ossana</div>
+                    <div class="exp-description">
+                        Istruttore di tiro con l'arco, produzione di contenuti digitali per social media (drone, Insta360), storytelling visivo e digital engagement.
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-gear"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Stagista</span>
+                        <span class="exp-date">mar 2023 (1 mese)</span>
+                    </div>
+                    <div class="exp-sub">Tecnodata Trentina Srl · Trento</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-camera-retro"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Segretario / responsabile foto e video</span>
+                        <span class="exp-date">mag 2022 - ago 2022</span>
+                    </div>
+                    <div class="exp-sub">Trentino Wild · Dimaro</div>
+                    <div class="exp-description">
+                        Gestione completa del flusso multimediale: selezione, elaborazione e organizzazione di immagini e video per la vendita immediata in formato digitale. Digital workflow, content delivery, media management in ambiente ad alto flusso turistico.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LINGUE -->
+        <div class="cv-section scroll-fade">
+            <div class="section-title"><i class="fa-regular fa-language"></i> Lingue</div>
+            <div class="languages-grid">
+                <div class="lang-item"><i class="fa-regular fa-flag"></i><span class="lang-name">Italiano</span><span class="lang-level">Madrelingua</span></div>
+                <div class="lang-item"><i class="fa-regular fa-flag"></i><span class="lang-name">Inglese</span><span class="lang-level">Full Professional</span></div>
+                <div class="lang-item"><i class="fa-regular fa-flag"></i><span class="lang-name">Tedesco</span><span class="lang-level">Limited Working</span></div>
+                <div class="lang-item"><i class="fa-regular fa-flag"></i><span class="lang-name">Ceco</span><span class="lang-level">Limited Working</span></div>
+                <div class="lang-item"><i class="fa-regular fa-flag"></i><span class="lang-name">Russo</span><span class="lang-level">Elementare</span></div>
+            </div>
+        </div>
+
+        <!-- CERTIFICAZIONI -->
+        <div class="cv-section scroll-fade">
+            <div class="section-title"><i class="fa-regular fa-certificate"></i> Certificazioni</div>
+            <div class="certs-grid">
+                <div class="cert-item"><i class="fa-regular fa-heart-pulse"></i> DAE (defibrillatore)</div>
+                <div class="cert-item"><i class="fa-regular fa-language"></i> B2 First (Inglese)</div>
+                <div class="cert-item"><i class="fa-regular fa-language"></i> Goethe-Zertifikat B1</div>
+                <div class="cert-item"><i class="fa-regular fa-chart-simple"></i> Fundamentals of Digital Marketing</div>
+                <div class="cert-item"><i class="fa-regular fa-drone"></i> Patentino UAS A1/A3 OPEN</div>
+            </div>
+        </div>
+
+        <!-- PREMI E HONORS-AWARDS -->
+        <div class="cv-section scroll-fade">
+            <div class="section-title"><i class="fa-regular fa-trophy"></i> Premi e riconoscimenti</div>
+            <div class="honor-item"><i class="fa-regular fa-medal"></i><span class="honor-name">RomeCup 2024</span><span class="honor-date">2024</span></div>
+            <div class="honor-item"><i class="fa-regular fa-medal"></i><span class="honor-name">Olimpiadi di Informatica a Squadre (15ª edizione)</span><span class="honor-date">2023/2024</span></div>
+            <div class="honor-item"><i class="fa-regular fa-medal"></i><span class="honor-name">Premio Asimov per l'editoria scientifica - Migliore Recensione</span><span class="honor-date">2024</span></div>
+        </div>
+
+        <!-- FORMAZIONE -->
+        <div class="cv-section scroll-fade">
+            <div class="section-title"><i class="fa-regular fa-graduation-cap"></i> Formazione</div>
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-building-columns"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Università di Trento</span>
+                        <span class="exp-date">2024 - 2027</span>
+                    </div>
+                    <div class="exp-sub">Bachelor of Engineering - Computer, Communication and Electronic Engineering</div>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="exp-icon"><i class="fa-regular fa-school"></i></div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <span class="exp-title">Liceo Russell, Cles</span>
+                        <span class="exp-date">2019 - 2024</span>
+                    </div>
+                    <div class="exp-sub">Maturità Liceo Scientifico opzione Scienze Applicate</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Robin Bertolini · ingegneria delle comunicazioni e elettronica</p>
+    </footer>
+
+    <script>
+        (function() {
+            // Active nav link
+            const currentPage = window.location.pathname.split('/').pop() || 'cv.html';
+            document.querySelectorAll('.nav-links a:not(.lang-switch a)').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) link.classList.add('active');
+            });
+
+            // Gestione cambio lingua (demo)
+            const langIt = document.querySelector('.lang-switch a:first-child');
+            const langEn = document.querySelector('.lang-switch a:last-child');
+            langIt.addEventListener('click', (e) => {
+                e.preventDefault();
+                langIt.classList.add('active-lang');
+                langEn.classList.remove('active-lang');
+            });
+            langEn.addEventListener('click', (e) => {
+                e.preventDefault();
+                langEn.classList.add('active-lang');
+                langIt.classList.remove('active-lang');
+            });
+
+            // Scroll reveal
+            const fadeElements = document.querySelectorAll('.scroll-fade');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
+
+            fadeElements.forEach(el => observer.observe(el));
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                    observer.unobserve(el);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
