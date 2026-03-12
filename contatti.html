@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Bertolini · Contatti</title>
+    <!-- Meta tag SEO (specifici per contatti) -->
+    <meta name="keywords" content="contatti Robin Bertolini, email robinbertolini@gmail.com, telefono 3474642301, LinkedIn, WhatsApp, offerte tirocinio, collaborazione ingegneria, ICT Trento">
+    <meta name="description" content="Contatta Robin Bertolini per opportunità di tirocinio, progetti o collaborazioni nel settore ICT e ingegneria. Risposta rapida e disponibilità.">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* ===== NAVBAR (identica alle altre pagine) ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px -10px rgba(0,0,0,0.05);
+        }
+
+        .logo a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(145deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: currentColor;
+            transition: width 0.25s ease;
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            font-weight: 600;
+        }
+
+        /* Colori specifici voci menu */
+        .nav-links a[href="index.html"] { color: #1e293b; }
+        .nav-links a[href="cv.html"] { color: #1e4a4a; }
+        .nav-links a[href="progetti.html"] { color: #b45309; }
+        .nav-links a[href="hobby.html"] { color: #b22222; }
+        .nav-links a[href="contatti.html"] { 
+            color: #ffffff; 
+            background: #0f172a; 
+            padding: 0.4rem 1.2rem; 
+            border-radius: 40px; 
+            margin-top: -0.2rem;
+        }
+        .nav-links a[href="contatti.html"]::after {
+            display: none;
+        }
+        .nav-links a[href="contatti.html"]:hover {
+            background: #1e293b;
+            transform: scale(1.02);
+        }
+
+        /* Selettore lingua */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-left: 1px solid #cbd5e1;
+            padding-left: 1.5rem;
+        }
+        .lang-switch a {
+            color: #64748b;
+            text-decoration: none;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .lang-switch a.active-lang {
+            background: #1e293b;
+            color: white;
+        }
+        .lang-switch a:not(.active-lang):hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* ===== MAIN CONTENT CONTATTI ===== */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #475569;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Griglia contatti */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 50px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #0f172a;
+            box-shadow: 0 30px 40px -15px #0f172a;
+        }
+
+        .contact-icon {
+            font-size: 3.5rem;
+            color: #0f172a;
+            transition: color 0.2s;
+        }
+
+        .contact-card:hover .contact-icon {
+            color: #0f172a; /* rimane scuro */
+        }
+
+        .contact-label {
+            font-size: 1.6rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-detail {
+            font-size: 1.1rem;
+            color: #334155;
+            word-break: break-word;
+        }
+
+        .contact-card:hover .contact-detail {
+            color: #0f172a;
+        }
+
+        /* Sezione disclaimer/privacy */
+        .privacy-note {
+            margin-top: 4rem;
+            padding: 1.5rem;
+            background: #f1f5f9;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .privacy-note i {
+            color: #0f172a;
+            margin-right: 0.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            color: #64748b;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Scroll fade */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .lang-switch { border-left: none; padding-left: 0; margin-left: 0; }
+            .page-title { font-size: 2.5rem; }
+            .contact-label { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">RB</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="cv.html">CV</a>
+            <a href="progetti.html">Progetti</a>
+            <a href="hobby.html">Sport & Hobby</a>
+            <a href="contatti.html" class="active">Contatti</a>
+            <div class="lang-switch">
+                <a class="active-lang">IT</a>
+                <a>EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="page-title scroll-fade">Contattami</h1>
+        <p class="subtitle scroll-fade">Sono aperto a colloqui, offerte di tirocinio e collaborazioni. Scegli il canale che preferisci.</p>
+
+        <!-- Griglia contatti (bottoni grandi) -->
+        <div class="contacts-grid scroll-fade">
+            <!-- Telefono -->
+            <a href="tel:+393474642301" class="contact-card">
+                <i class="fa-regular fa-phone contact-icon"></i>
+                <span class="contact-label">Telefono</span>
+                <span class="contact-detail">+39 347 464 2301</span>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:robinbertolini@gmail.com" class="contact-card">
+                <i class="fa-regular fa-envelope contact-icon"></i>
+                <span class="contact-label">Email</span>
+                <span class="contact-detail">robinbertolini@gmail.com</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/robin-bertolini-/" target="_blank" class="contact-card">
+                <i class="fa-brands fa-linkedin contact-icon"></i>
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-detail">/in/robin-bertolini-</span>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/393474642301" target="_blank" class="contact-card">
+                <i class="fa-brands fa-whatsapp contact-icon"></i>
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-detail">Scrivimi direttamente</span>
+            </a>
+        </div>
+
+        <!-- Nota privacy / invito -->
+        <div class="privacy-note scroll-fade">
+            <i class="fa-regular fa-lock"></i> I tuoi dati saranno trattati in modo riservato. Rispondo di solito entro 24 ore.
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Robin Bertolini · ingegneria delle comunicazioni e elettronica</p>
+    </footer>
+
+    <script>
+        (function() {
+            // Active nav link
+            const currentPage = window.location.pathname.split('/').pop() || 'contatti.html';
+            document.querySelectorAll('.nav-links a:not(.lang-switch a)').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) link.classList.add('active');
+            });
+
+            // Lingua (demo)
+            const langIt = document.querySelector('.lang-switch a:first-child');
+            const langEn = document.querySelector('.lang-switch a:last-child');
+            langIt.addEventListener('click', (e) => {
+                e.preventDefault();
+                langIt.classList.add('active-lang');
+                langEn.classList.remove('active-lang');
+            });
+            langEn.addEventListener('click', (e) => {
+                e.preventDefault();
+                langEn.classList.add('active-lang');
+                langIt.classList.remove('active-lang');
+            });
+
+            // Scroll reveal
+            const fadeElements = document.querySelectorAll('.scroll-fade');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
+
+            fadeElements.forEach(el => observer.observe(el));
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                    observer.unobserve(el);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
