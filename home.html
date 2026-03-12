@@ -25,12 +25,12 @@
             scroll-behavior: smooth;
         }
 
-        /* ===== NAVBAR con colori personalizzati ===== */
+        /* ===== NAVBAR con colori personalizzati e selettore lingua ===== */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 2.5rem;
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -55,6 +55,7 @@
         .nav-links {
             display: flex;
             gap: 2.5rem;
+            align-items: center;
         }
 
         .nav-links a {
@@ -71,7 +72,7 @@
             left: 0;
             width: 0;
             height: 2.5px;
-            background: currentColor; /* usa il colore del testo */
+            background: currentColor;
             transition: width 0.25s ease;
             border-radius: 4px;
             opacity: 0.7;
@@ -87,10 +88,10 @@
         }
 
         /* colori specifici voci menu */
-        .nav-links a[href="index.html"] { color: #1e293b; } /* home */
-        .nav-links a[href="cv.html"] { color: #1e4a4a; } /* verde scuro professionale */
-        .nav-links a[href="progetti.html"] { color: #b45309; } /* ambra professionale */
-        .nav-links a[href="hobby.html"] { color: #b22222; } /* rosso vermiglio */
+        .nav-links a[href="index.html"] { color: #1e293b; }
+        .nav-links a[href="cv.html"] { color: #1e4a4a; }
+        .nav-links a[href="progetti.html"] { color: #b45309; }
+        .nav-links a[href="hobby.html"] { color: #b22222; }
         .nav-links a[href="contatti.html"] { 
             color: #ffffff; 
             background: #0f172a; 
@@ -99,57 +100,64 @@
             margin-top: -0.2rem;
         }
         .nav-links a[href="contatti.html"]::after {
-            display: none; /* rimuove sottolineatura per il bottone nero */
+            display: none;
         }
         .nav-links a[href="contatti.html"]:hover {
             background: #1e293b;
             transform: scale(1.02);
         }
 
-        /* ===== COVER + PROFILO ===== */
+        /* selettore lingua */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-left: 1px solid #cbd5e1;
+            padding-left: 1.5rem;
+        }
+        .lang-switch a {
+            color: #64748b;
+            text-decoration: none;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            transition: all 0.2s;
+        }
+        .lang-switch a.active-lang {
+            background: #1e293b;
+            color: white;
+        }
+        .lang-switch a:not(.active-lang):hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* ===== COVER (semplificata) ===== */
         .cover-wrapper {
-            position: relative;
             width: 100%;
-            height: 280px;
+            height: 200px;
             overflow: hidden;
             background: #1e293b;
         }
-
         .cover-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center 30%;
             filter: brightness(0.85) saturate(1.2);
-            transition: transform 0.3s ease;
         }
 
-        .cover-wrapper:hover .cover-image {
-            transform: scale(1.02);
+        /* ===== FOTO PROFILO (ora intera e centrata) ===== */
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            margin-top: -50px; /* leggera sovrapposizione, ma foto intera */
+            margin-bottom: 1rem;
         }
-
-        .cover-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
-            pointer-events: none;
-        }
-
-        .profile-pic-container {
-            position: absolute;
-            bottom: -65px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.25));
-        }
-
         .profile-pic {
-            width: 170px;
-            height: 170px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             border: 5px solid white;
             object-fit: cover;
@@ -158,7 +166,6 @@
             box-shadow: 0 20px 30px -10px rgba(37,99,235,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .profile-pic:hover {
             transform: scale(1.02);
             box-shadow: 0 25px 35px -8px #2563eb;
@@ -168,16 +175,16 @@
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 5rem 2rem 4rem;
+            padding: 1rem 2rem 4rem;
         }
 
-        /* layout a due colonne con foto verticale */
         .hero-row {
             display: flex;
             align-items: center;
             gap: 3rem;
             flex-wrap: wrap;
             justify-content: center;
+            margin-top: 2rem;
         }
 
         .hero-text {
@@ -190,18 +197,17 @@
             text-align: center;
         }
 
-        /* foto a figura intera (verticale) */
         .fullbody-cutout {
             width: 100%;
             max-width: 320px;
-            border-radius: 30px 30px 30px 30px; /* leggera curvatura */
+            border-radius: 30px;
             object-fit: cover;
             object-position: center top;
             box-shadow: 0 30px 45px -20px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             border: 3px solid rgba(255,255,255,0.5);
             background: white;
-            aspect-ratio: 0.7 / 1; /* proporzioni verticali */
+            aspect-ratio: 0.7 / 1;
         }
 
         .fullbody-cutout:hover {
@@ -282,7 +288,6 @@
             box-shadow: 0 12px 20px -12px #2563eb;
         }
 
-        /* extra bio + bottoni grandi */
         .extra-bio {
             background: white;
             border-radius: 50px;
@@ -309,7 +314,6 @@
             margin-bottom: 2rem;
         }
 
-        /* griglia bottoni grandi */
         .big-buttons-grid {
             display: flex;
             flex-wrap: wrap;
@@ -344,16 +348,16 @@
         }
 
         .big-button.cv {
-            background: #1e4a4a; /* verde scuro professionale */
+            background: #1e4a4a;
         }
         .big-button.progetti {
-            background: #b45309; /* ambra */
+            background: #b45309;
         }
         .big-button.hobby {
-            background: #b22222; /* vermiglio */
+            background: #b22222;
         }
         .big-button.contatti {
-            background: #0f172a; /* nero/grafite */
+            background: #0f172a;
             color: white;
         }
 
@@ -367,7 +371,6 @@
             backdrop-filter: blur(4px);
         }
 
-        /* ===== SCROLL ANIMATION ===== */
         .scroll-fade {
             opacity: 0;
             transform: translateY(25px);
@@ -382,11 +385,11 @@
         @media (max-width: 800px) {
             .navbar { flex-direction: column; gap: 1rem; }
             .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .lang-switch { border-left: none; padding-left: 0; margin-left: 0; }
             .hero-title { font-size: 2.5rem; }
             .hero-subtitle { font-size: 1.3rem; }
             .profile-pic { width: 140px; height: 140px; }
-            .cover-wrapper { height: 200px; }
-            .profile-pic-container { bottom: -55px; }
+            .profile-section { margin-top: -30px; }
             .hero-row { flex-direction: column; text-align: center; }
             .hero-text { text-align: center; }
             .qualities { justify-content: center; }
@@ -403,20 +406,25 @@
             <a href="progetti.html">Progetti</a>
             <a href="hobby.html">Sport & Hobby</a>
             <a href="contatti.html">Contatti</a>
+            <!-- selettore lingua -->
+            <div class="lang-switch">
+                <a href="#" class="active-lang">IT</a>
+                <a href="#">EN</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Cover con foto profilo centrata -->
+    <!-- Cover semplice -->
     <div class="cover-wrapper">
-        <img class="cover-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&h=300&fit=crop&auto=format&q=80" alt="Cover" loading="lazy">
-        <div class="cover-overlay"></div>
-        <div class="profile-pic-container">
-            <img class="profile-pic" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces&q=80&auto=format" alt="Robin Bertolini">
-        </div>
+        <img class="cover-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&h=200&fit=crop&auto=format&q=80" alt="Cover" loading="lazy">
+    </div>
+
+    <!-- Foto profilo separata, intera e centrata -->
+    <div class="profile-section">
+        <img class="profile-pic" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces&q=80" alt="Robin Bertolini">
     </div>
 
     <main class="main-content">
-        <!-- Riga con testo + foto verticale a figura intera -->
         <div class="hero-row scroll-fade">
             <div class="hero-text">
                 <h1 class="hero-title">Hi, I'm Robin Bertolini</h1>
@@ -436,17 +444,15 @@
                 </div>
             </div>
             <div class="hero-image">
-                <!-- Foto a figura intera verticale (dai piedi alla testa) -->
-                <img class="fullbody-cutout" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80&auto=format&fit=crop&crop=entire" alt="Robin a figura intera" loading="lazy">
+                <!-- Foto a figura intera -->
+                <img class="fullbody-cutout" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&q=80&auto=format&fit=crop&crop=entire" alt="Robin a figura intera" loading="lazy">
             </div>
         </div>
 
-        <!-- Extra bio con bottoni grandi -->
         <div class="extra-bio scroll-fade">
             <h2><i class="fa-regular fa-note-sticky"></i> In breve</h2>
             <p>Studente al terzo anno presso l'Università di Trento. I miei interessi spaziano dall'elettronica analogica alle reti 5G, sempre con un approccio pratico e orientato al progetto. Amo trasformare teorie in prototipi funzionanti.</p>
             
-            <!-- Bottoni grandi che portano alle altre pagine -->
             <div class="big-buttons-grid">
                 <a href="cv.html" class="big-button cv"><i class="fa-regular fa-file-lines"></i> CV</a>
                 <a href="progetti.html" class="big-button progetti"><i class="fa-regular fa-folder-open"></i> Progetti</a>
@@ -462,14 +468,27 @@
 
     <script>
         (function() {
-            // Active nav link
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-links a').forEach(link => {
+            document.querySelectorAll('.nav-links a:not(.lang-switch a)').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === currentPage) link.classList.add('active');
             });
 
-            // Intersection Observer per scroll reveal
+            // Simulazione cambio lingua (solo estetica)
+            const langIt = document.querySelector('.lang-switch a:first-child');
+            const langEn = document.querySelector('.lang-switch a:last-child');
+            langIt.addEventListener('click', (e) => {
+                e.preventDefault();
+                langIt.classList.add('active-lang');
+                langEn.classList.remove('active-lang');
+            });
+            langEn.addEventListener('click', (e) => {
+                e.preventDefault();
+                langEn.classList.add('active-lang');
+                langIt.classList.remove('active-lang');
+            });
+
+            // Scroll reveal
             const fadeElements = document.querySelectorAll('.scroll-fade');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -481,8 +500,6 @@
             }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
 
             fadeElements.forEach(el => observer.observe(el));
-
-            // Mostra subito quelli già visibili
             fadeElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
                 if (rect.top < window.innerHeight * 0.8) {
