@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta name="keywords" content="drone, droni, fotografia aerea, video, FPV, riprese, Instagram reel, autoplay">
+    <meta name="keywords" content="drone, droni, fotografia aerea, video, FPV, riprese, Instagram reel">
     <meta name="description" content="Pagina dedicata al mondo dei droni: carosello di foto e griglia di reel Instagram di Robin Bertolini.">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
             scroll-behavior: smooth;
         }
 
-        /* ===== NAVBAR (identica, ma colore drone azzurro) ===== */
+        /* ===== NAVBAR ===== */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -90,11 +90,10 @@
             font-weight: 600;
         }
 
-        /* Colori voci menu (drone in azzurro chiaro) */
         .nav-links a[href="index.html"] { color: #1e293b; }
         .nav-links a[href="cv.html"] { color: #1e4a4a; }
         .nav-links a[href="progetti.html"] { color: #b45309; }
-        .nav-links a[href="drone.html"] { color: #60a5fa; } /* light blue */
+        .nav-links a[href="drone.html"] { color: #60a5fa; }
         .nav-links a[href="contatti.html"] { 
             color: #ffffff; 
             background: #0f172a; 
@@ -110,7 +109,6 @@
             transform: scale(1.02);
         }
 
-        /* Selettore lingua */
         .lang-switch {
             display: flex;
             gap: 0.5rem;
@@ -137,7 +135,7 @@
             color: #1e293b;
         }
 
-        /* ===== MAIN CONTENT DRONE ===== */
+        /* ===== MAIN CONTENT ===== */
         .main-content {
             max-width: 1400px;
             margin: 0 auto;
@@ -148,7 +146,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 2.8rem;
             font-weight: 700;
-            color: #60a5fa; /* light blue */
+            color: #60a5fa;
             margin-bottom: 2rem;
             display: flex;
             align-items: center;
@@ -249,7 +247,7 @@
             border-color: white;
         }
 
-        /* ----- GRIGLIA REEL INSTAGRAM 3x3 ----- */
+        /* ----- GRIGLIA REEL INSTAGRAM 3x3 (EMBED CLASSICO) ----- */
         .reels-section {
             margin-top: 3rem;
         }
@@ -277,14 +275,16 @@
         }
 
         .reel-card {
-            background: white;
+            background: transparent;
             border-radius: 30px;
             overflow: hidden;
             box-shadow: 0 15px 25px -12px rgba(96, 165, 250, 0.3);
             border: 1px solid #60a5fa20;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 9 / 16; /* formato reel verticale */
+            aspect-ratio: 9 / 16;
             position: relative;
+            display: block;
+            text-decoration: none;
         }
 
         .reel-card:hover {
@@ -292,33 +292,12 @@
             box-shadow: 0 20px 30px -10px #60a5fa;
         }
 
-        .reel-video {
+        .reel-card iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            border: none;
             display: block;
-        }
-
-        .reel-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            pointer-events: none;
-        }
-
-        .reel-overlay i {
-            font-size: 1.3rem;
-            color: #60a5fa;
-            filter: drop-shadow(0 2px 4px black);
+            border-radius: 30px;
         }
 
         /* Footer */
@@ -377,24 +356,20 @@
     <main class="main-content">
         <h1 class="page-title scroll-fade"><i class="fa-regular fa-compass"></i> Drone · Aerial World</h1>
 
-        <!-- CAROSELLO FOTO GRANDE -->
+        <!-- CAROSELLO FOTO GRANDE (immagini locali) -->
         <section class="carousel-section scroll-fade">
             <div class="carousel-container" id="carousel">
-                <div class="carousel-track" id="carouselTrack">
-                    <!-- Slides inserite via JS -->
-                </div>
+                <div class="carousel-track" id="carouselTrack"></div>
                 <button class="carousel-btn carousel-prev" id="prevBtn">‹</button>
                 <button class="carousel-btn carousel-next" id="nextBtn">›</button>
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
         </section>
 
-        <!-- GRIGLIA REEL INSTAGRAM 3x3 (AUTOPLAY) -->
+        <!-- GRIGLIA REEL INSTAGRAM 3x3 (embed classici) -->
         <section class="reels-section scroll-fade">
             <h2 class="section-subtitle"><i class="fa-brands fa-instagram"></i> Reel recenti</h2>
-            <div class="reels-grid" id="reelsGrid">
-                <!-- Generati via JS 9 reel -->
-            </div>
+            <div class="reels-grid" id="reelsGrid"></div>
         </section>
     </main>
 
@@ -404,12 +379,12 @@
 
     <script>
         (function() {
-            // ---------- CAROSELLO ----------
+            // ---------- CAROSELLO CON LE TUE FOTO LOCALI ----------
             const images = [
-                "DJI_0523.JPG", 
-                "DJI_0226.JPG", 
-                "DJI_0969.JPG", 
-                "DJI_0803.JPG", 
+                "DJI_0523.JPG",
+                "DJI_0226.JPG",
+                "DJI_0969.JPG",
+                "DJI_0803.JPG",
                 "DJI_0503.JPG",
                 "DJI_0412.JPG"
             ];
@@ -421,14 +396,12 @@
             let currentIndex = 0;
 
             function renderCarousel() {
-                // Slides
                 track.innerHTML = images.map((src, i) => `
                     <div class="carousel-slide">
                         <img src="${src}" alt="Drone shot ${i+1}" loading="lazy">
                     </div>
                 `).join('');
 
-                // Dots
                 dotsContainer.innerHTML = images.map((_, i) => `
                     <div class="dot ${i === currentIndex ? 'active' : ''}" data-index="${i}"></div>
                 `).join('');
@@ -453,7 +426,6 @@
                 updateSlide();
             }
 
-            // Event listeners
             prevBtn.addEventListener('click', prevSlide);
             nextBtn.addEventListener('click', nextSlide);
             dotsContainer.addEventListener('click', (e) => {
@@ -466,7 +438,6 @@
                 }
             });
 
-            // Autoplay carosello (ogni 5 secondi)
             let autoplay = setInterval(nextSlide, 5000);
             const carousel = document.getElementById('carousel');
             carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
@@ -476,25 +447,47 @@
 
             renderCarousel();
 
-            // ---------- REEL INSTAGRAM (3x3) ----------
+            // ---------- REEL INSTAGRAM (EMBED CLASSICO CON IFRAME) ----------
+            const reelLinks = [
+                "https://www.instagram.com/reel/DB1uQy-ukBP",
+                "https://www.instagram.com/reel/DFa3Fp7ufZd",
+                "https://www.instagram.com/reel/Cwm3ksnrk7a",
+                "https://www.instagram.com/reel/Cl382f0DnSK",
+                "https://www.instagram.com/reel/Ck6OAIxjQts",
+                "https://www.instagram.com/reel/Cjk9ZHvj8Ru",
+                "https://www.instagram.com/reel/CiU757AMik6",
+                "https://www.instagram.com/reel/Chm2ftWJ-lE",
+                "https://www.instagram.com/reel/CwKhN61pwdF"
+            ];
+
             const reelsGrid = document.getElementById('reelsGrid');
-            // Usiamo lo stesso video campione (fiore) per tutti, ma potresti sostituire con URL reali
-            const reelVideoSrc = "https://www.instagram.com/rob_ber345/";
-            // Creiamo 9 reel
-            const reelCount = 9;
-            for (let i = 0; i < reelCount; i++) {
-                const card = document.createElement('div');
+            reelsGrid.innerHTML = ''; // Svuota la griglia
+
+            reelLinks.forEach(link => {
+                // Estrae l'ID del reel dall'URL
+                const reelId = link.split('/reel/')[1].split('/')[0];
+                
+                // Crea l'iframe per l'embed di Instagram
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.instagram.com/reel/${reelId}/embed`;
+                iframe.width = '100%';
+                iframe.height = '100%';
+                iframe.frameBorder = '0';
+                iframe.scrolling = 'no';
+                iframe.allowFullscreen = true;
+                iframe.style.borderRadius = '30px';
+                iframe.loading = 'lazy'; // lazy loading per performance
+
+                // Crea la card e ci aggiunge l'iframe
+                const card = document.createElement('a');
+                card.href = link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
                 card.className = 'reel-card';
-                card.innerHTML = `
-                    <video class="reel-video" autoplay loop muted playsinline>
-                        <source src="${reelVideoSrc}" type="video/mp4">
-                    </video>
-                    <div class="reel-overlay">
-                        <i class="fa-brands fa-instagram"></i> @robin_bertolini
-                    </div>
-                `;
+                
+                card.appendChild(iframe);
                 reelsGrid.appendChild(card);
-            }
+            });
 
             // ---------- SELEZIONE LINGUA (demo) ----------
             const langIt = document.querySelector('.lang-switch a:first-child');
@@ -523,7 +516,6 @@
 
             fadeElements.forEach(el => {
                 observer.observe(el);
-                // Controllo immediato per elementi già visibili
                 const rect = el.getBoundingClientRect();
                 if (rect.top < window.innerHeight * 0.8) {
                     el.classList.add('visible');
@@ -531,7 +523,7 @@
                 }
             });
 
-            // Imposta active link su Drone (già presente con classe active, ma per sicurezza)
+            // Assicura che il link "Drone" sia attivo
             const currentPage = window.location.pathname.split('/').pop() || 'drone.html';
             document.querySelectorAll('.nav-links a:not(.lang-switch a)').forEach(link => {
                 link.classList.remove('active');
